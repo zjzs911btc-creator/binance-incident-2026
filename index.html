@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Binance 被盗事件：金额、时间线与资金流向</title>
+<style>
+*{box-sizing:border-box}
+:root{--bg:#F7F0DC;--card:#FCF7EA;--ink:#2C2418;--sub:#7A6A54;--line:#E4D6B8;--green:#2F5D4E;--terra:#B4552D;--gold:#C08A2E;--red:#A33A2A;--muted:#A99A80}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;font-size:15px;line-height:1.7;font-feature-settings:"tnum" 1,"lnum" 1}
+.wrap{max-width:1060px;margin:0 auto;padding:34px 22px 54px}
+.kicker{font-size:10.5px;letter-spacing:.24em;color:#A9844F;text-transform:uppercase}
+h1,h2,h3{font-family:"Songti SC","STSong","Noto Serif SC",Georgia,serif;font-weight:600}
+h1{font-size:40px;line-height:1.22;margin:10px 0 8px}
+.sub{color:var(--sub);font-size:13.5px}
+.verdict{margin:20px 0 22px;background:#2F4A3E;color:#F1E9D8;border-radius:14px;padding:17px 22px;font-size:16px;line-height:1.8}
+.verdict b{color:#A7DCC5}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin:0 0 24px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:15px 17px}
+.kpi .t{font-size:11.5px;color:var(--sub)}
+.kpi .v{font-family:"Songti SC",Georgia,serif;font-size:23px;margin:3px 0 1px;line-height:1.25}
+.kpi .d{font-size:11.5px;color:var(--sub);line-height:1.7}
+section{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 26px;margin-bottom:16px}
+.sec{display:flex;align-items:baseline;gap:12px}
+.sec .no{font-family:"Songti SC",Georgia,serif;font-size:29px;color:#CDBD9E;line-height:1}
+h2{font-size:23px;margin:0}
+.lead{color:var(--sub);font-size:13.5px;margin:6px 0 12px}
+.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:14px 0 2px}
+.tl{position:relative;padding:14px 14px 12px;background:#FAF3E2;border:1px solid #EADCC0;border-radius:12px}
+.tl:before{content:"";position:absolute;top:0;left:16px;right:16px;height:3px;background:var(--gold);border-radius:0 0 3px 3px}
+.tl .date{font-size:11px;color:var(--terra);font-weight:700}
+.tl .title{font-size:13.5px;font-weight:700;margin:3px 0 3px}
+.tl .txt{font-size:11.5px;color:var(--sub);line-height:1.7}
+.tl.alt:before{background:var(--green)}
+figure{margin:8px 0 0}
+figure svg{width:100%;height:auto;display:block;border-radius:10px;background:#FBF6EA;border:1px solid var(--line)}
+.cap{font-size:11.5px;color:var(--sub);margin-top:8px;line-height:1.8}
+table{width:100%;border-collapse:collapse;font-size:12.6px;margin:10px 0}
+th{font-size:10.5px;letter-spacing:.06em;color:var(--sub);font-weight:500;border-bottom:1px solid var(--line);padding:9px 6px;text-align:right;white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+td{padding:9px 6px;border-bottom:1px solid #F0E4CC;text-align:right;white-space:nowrap}
+td.l{text-align:left}
+tr:last-child td{border-bottom:none}
+.pos{color:var(--green);font-weight:600}.neg{color:var(--terra);font-weight:600}
+.note{background:#F8F0DC;border:1px solid #E9DABD;border-radius:10px;padding:12px 16px;font-size:12.4px;color:#5E5140;line-height:1.9;margin-top:10px}
+.note b{color:#3B2F1E}
+.sources{font-size:11.5px;color:var(--sub);line-height:2}
+.sources a{color:var(--green);text-decoration:none;border-bottom:1px solid #C9BFA6}
+footer{text-align:center;font-size:11.5px;color:#94846A;margin-top:18px;line-height:1.8}
+@media(max-width:840px){h1{font-size:30px}.kpis,.timeline{grid-template-columns:1fr 1fr}section{padding:17px 14px}table{font-size:11px}}
+@media(max-width:520px){.kpis,.timeline{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker">Binance Incident · 2026-10-30 · Timeline &amp; Flow</div>
+  <h1>Binance 被盗：<br>约 $6.3B 影响，约 $3B 已冻结</h1>
+  <div class="sub">2026-10-30 04:20（北京时间）· 50 项 EIP-7702 授权 · 3 分钟内多链转出 · 官方初步：DevOps 工程师笔记本被入侵</div>
+  <div class="verdict">先给结论：链上转出总额约 <b>$5.8B</b>（$5.57–5.84B）；Binance 官方初步预计影响约 <b>$6.3B</b>，已冻结约 <b>$3B</b>，按官方口径推算净损失约 <b>$3.3B</b>，最终以完整复盘为准。用户资金由 SAFU + 公司资金 <b>全额覆盖</b>，充提暂时暂停。</div>
+</header>
+
+<div class="kpis">
+  <div class="kpi"><div class="t">攻击时间</div><div class="v">10-30 04:20</div><div class="d">北京时间；UTC 10-29 20:20</div></div>
+  <div class="kpi"><div class="t">链上转出总额</div><div class="v">≈ $5.8B</div><div class="d">Arkham / 分析师：$5.57–5.84B</div></div>
+  <div class="kpi"><div class="t">官方初步影响</div><div class="v">≈ $6.3B</div><div class="d">Binance 10:24 初步公告</div></div>
+  <div class="kpi"><div class="t">已冻结</div><div class="v">≈ $3B</div><div class="d">Tether/Circle/Ripple/Arbitrum 等</div></div>
+</div>
+
+<section>
+  <div class="sec"><div class="no">01</div><h2>时间概括</h2></div>
+  <div class="timeline">
+    <div class="tl"><div class="date">04:20</div><div class="title">广播 50 项授权</div><div class="txt">攻击者广播一笔包含 50 项授权请求的交易；约 3 分钟后开始批量转出，涉及以太��、波场、比特币等多条链。</div></div>
+    <div class="tl"><div class="date">04:23</div><div class="title">3 分钟批量转出</div><div class="txt">ETH 167,464 枚 + 63 种代币、Tron、BTC 18,270 枚等被转至新地址；按当时价格合计约 $5.8B。</div></div>
+    <div class="tl"><div class="date">08:04</div><div class="title">何一：全额承担</div><div class="txt">Binance 联合 CEO 何一表示用户资金安全，Binance 承担全部损失；充提暂停，冻结资金并配合执法。</div></div>
+    <div class="tl alt"><div class="date">10:24</div><div class="title">官方初步公告</div><div class="txt">初步调查：DevOps 工程师笔记本被入侵，攻击者进入服务容器并提交未授权提现；未发现私钥泄露；影响约 $6.3B，已冻结约 $3B。</div></div>
+  </div>
+  <div class="note"><b>日期口径：</b>攻击发生在北京时间 2026-10-30 凌晨 04:20（UTC 2026-10-29 20:20）；官方初步公告为北京时间 10:24。本文统一用北京时间。</div>
+</section>
+
+<section>
+  <div class="sec"><div class="no">02</div><h2>被盗资金流向图</h2></div>
+  <div class="lead">从入侵入口到多链转出、冻结与未冻结的分流；带宽按金额比例。</div>
+  <figure>
+    <svg viewBox="0 0 1000 640" role="img" aria-label="2026-10-30 Binance 被盗资金流向图">
+      <defs>
+        <marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+          <path d="M0,0 L9,4.5 L0,9 Z" fill="#8A7A63"/>
+        </marker>
+      </defs>
+
+      <path d="M380,55 L520,55" stroke="#8A7A63" stroke-width="2" marker-end="url(#ar)" fill="none"/>
+      <path d="M670,90 C670,118 650,118 650,140" stroke="#8A7A63" stroke-width="2" marker-end="url(#ar)" fill="none"/>
+      <path d="M500,220 L500,300" stroke="#8A7A63" stroke-width="2" marker-end="url(#ar)" fill="none"/>
+      <path d="M300,350 L300,450" stroke="#8A7A63" stroke-width="2" marker-end="url(#ar)" fill="none"/>
+      <path d="M700,350 L700,450" stroke="#8A7A63" stroke-width="2" marker-end="url(#ar)" fill="none"/>
+
+      <rect x="80" y="20" width="300" height="70" rx="12" fill="#A33A2A"/>
+      <text x="230" y="48" text-anchor="middle" fill="#FFF3EA" font-size="13.5">DevOps 工程师笔记本</text>
+      <text x="230" y="72" text-anchor="middle" fill="#FFE2D6" font-size="11.5">被入侵（官方初步）</text>
+
+      <rect x="520" y="20" width="300" height="70" rx="12" fill="#C08A2E"/>
+      <text x="670" y="48" text-anchor="middle" fill="#2C2418" font-size="13.5">服务容器 / 签名系统</text>
+      <text x="670" y="72" text-anchor="middle" fill="#2C2418" font-size="11.5">提交未授权提现</text>
+
+      <rect x="350" y="140" width="300" height="80" rx="12" fill="#B4552D"/>
+      <text x="500" y="169" text-anchor="middle" fill="#FFF3EA" font-size="13.5">攻击者地址簇</text>
+      <text x="500" y="193" text-anchor="middle" fill="#FFFFFF" font-size="14" font-weight="700">Binance-Hacker-1029 · ≈$5.8B</text>
+
+      <rect x="80" y="300" width="541" height="50" fill="#2F6B57"/>
+      <rect x="621" y="300" width="91" height="50" fill="#B4552D"/>
+      <rect x="712" y="300" width="21" height="50" fill="#C08A2E"/>
+      <rect x="733" y="300" width="187" height="50" fill="#A99A80"/>
+      <text x="350" y="331" text-anchor="middle" fill="#FFFFFF" font-size="12" font-weight="700">ETH 64%</text>
+      <text x="666" y="331" text-anchor="middle" fill="#FFFFFF" font-size="10.5" font-weight="700">Tron 11%</text>
+      <text x="826" y="331" text-anchor="middle" fill="#2C2418" font-size="10.5" font-weight="700">其他 22%</text>
+      <text x="722" y="288" text-anchor="middle" fill="#8A5E18" font-size="9.5">BTC 2%</text>
+      <text x="500" y="278" text-anchor="middle" fill="#6B6259" font-size="11">链上转出总额 ≈ $5.8B（按当时价格）</text>
+
+      <rect x="160" y="450" width="300" height="70" rx="12" fill="#2F6B57"/>
+      <text x="310" y="478" text-anchor="middle" fill="#F1E9D8" font-size="13.5">已冻结 ≈ $3B</text>
+      <text x="310" y="501" text-anchor="middle" fill="#EAF6F1" font-size="10.8">Tether / Circle / Ripple / Arbitrum</text>
+
+      <rect x="540" y="450" width="300" height="70" rx="12" fill="#A99A80"/>
+      <text x="690" y="478" text-anchor="middle" fill="#2C2418" font-size="13.5">未冻结 ≈ $2.8B</text>
+      <text x="690" y="501" text-anchor="middle" fill="#2C2418" font-size="10.8">新地址 / 部分 USDT 换 ETH</text>
+
+      <text x="500" y="590" text-anchor="middle" fill="#8A7A63" font-size="10.5">净损失 ≈ $3.3B（官方初步 6.3 − 3.0，待完整复盘）；金额口径见下表</text>
+    </svg>
+  </figure>
+  <div class="cap"><b>怎么读：</b>攻击者从被入侵的 DevOps 笔记本进入服务容器/签名系统，提交未授权提现；链上通过 EIP-7702 授权在约 3 分钟内把多链资产转出（合计约 $5.8B）。随后发行方与链上安全委员会冻结约 $3B，未冻结约 $2.8B；官方初步影响约 $6.3B，净损失按 6.3−3.0 推算约 $3.3B，最终以复盘为准。</div>
+</section>
+
+<section>
+  <div class="sec"><div class="no">03</div><h2>金额：精确到口径</h2></div>
+  <table>
+    <tr><th>指标</th><th>数值</th><th>口径 / 说明</th></tr>
+    <tr><td class="l">攻击时间</td><td>2026-10-30 04:20（UTC+8）</td><td>神鱼链上复盘；UTC 2026-10-29 20:20</td></tr>
+    <tr><td class="l">链上转出总额</td><td class="neg">≈ $5.8B</td><td>Arkham / 分析师：$5.57–5.84B；按当时价格</td></tr>
+    <tr><td class="l">官方初��影响</td><td class="neg">≈ $6.3B</td><td>Binance 10:24 初步公告</td></tr>
+    <tr><td class="l">已冻结</td><td class="pos">≈ $3B</td><td>Binance 官方；发行方合计 &gt;$2.59B</td></tr>
+    <tr><td class="l">净损失（推算）</td><td class="neg">≈ $3.3B</td><td>6.3 − 3.0；官方尚未给最终净额</td></tr>
+    <tr><td class="l">早期口径</td><td>略超 $1B</td><td>CZ 08:10 发言；已被 10:24 官方初步更新</td></tr>
+    <tr><td class="l">用户资金</td><td class="pos">全额覆盖</td><td>SAFU + 公司资金；用户资金安全</td></tr>
+  </table>
+  <div class="note"><b>为什么有 $5.8B / $6.3B 两个数：</b>$5.8B 是链上按当时价格估算的“转出总额”；$6.3B 是 Binance 官方初步的“影响金额”，两者估值时点/口径不同。冻结约 $3B 后，净损失按官方口径推算约 $3.3B；最终数字以 Binance 完整技术复盘为准。</div>
+</section>
+
+<section>
+  <div class="sec"><div class="no">04</div><h2>分链金额与冻结</h2></div>
+  <table>
+    <tr><th>链 / 资产</th><th>转出金额</th><th>数量</th><th>已冻结</th></tr>
+    <tr><td class="l"><b>Ethereum</b></td><td>≈ $3.75B</td><td>167,464 ETH + 63 种代币</td><td>≈ $2.4B</td></tr>
+    <tr><td class="l"><b>Tron</b></td><td>≈ $0.63B</td><td>—</td><td>≈ $0.38B</td></tr>
+    <tr><td class="l"><b>Bitcoin</b></td><td>≈ $0.144B</td><td>18,270 BTC</td><td>—</td></tr>
+    <tr><td class="l"><b>其他链 / 资产</b></td><td>≈ $1.3B</td><td>—</td><td>���</td></tr>
+    <tr><td class="l"><b>合计</b></td><td class="neg">≈ $5.8B</td><td>—</td><td class="pos">≈ $3B</td></tr>
+  </table>
+  <table>
+    <tr><th>冻结方</th><th>冻结金额</th><th>说明</th></tr>
+    <tr><td class="l">Tether</td><td>13.8 亿 USDT</td><td>神鱼口径；Ardoino 称 &gt;15.67 亿，统计口径不同</td></tr>
+    <tr><td class="l">Circle</td><td>8.23 亿 USDC</td><td>同一地址簇</td></tr>
+    <tr><td class="l">Ripple</td><td>4,054 万 RLUSD</td><td>及其他代币</td></tr>
+    <tr><td class="l">Arbitrum 安全委员会</td><td>≈ 3,050 万</td><td>与本次事件相关地址</td></tr>
+    <tr><td class="l">合计</td><td class="pos">&gt;$2.5B</td><td>Binance 官方称已冻结约 $3B</td></tr>
+  </table>
+  <div class="note"><b>不要重复相加：</b>“Tether/Circle/Ripple 冻结”与“以太坊/波场链上冻结”存在重叠；Binance 官方口径是“约 $3B 已冻结”。</div>
+</section>
+
+<section>
+  <div class="sec"><div class="no">05</div><h2>攻击路径：官方与链上研究</h2></div>
+  <table>
+    <tr><th>环节</th><th>目前披露</th></tr>
+    <tr><td class="l">入口</td><td>Binance 初步调查：DevOps 工程师笔记本被入侵</td></tr>
+    <tr><td class="l">横向</td><td>攻击者进入服务容器，提交未授权提现交易</td></tr>
+    <tr><td class="l">签名</td><td>官方称未发现钱包私钥泄露；核心问题可能在签名/授权环节</td></tr>
+    <tr><td class="l">链上表现</td><td>EIP-7702 授权被滥用：50 项授权请求、64 种代币清单、约 3 分钟批量转出</td></tr>
+    <tr><td class="l">准备</td><td>神鱼：攻击者用测试钱包演练 2 次，最后一次距正式攻击约 3.5 小时；部分 USDT 换 ETH 规避冻结</td></tr>
+    <tr><td class="l">资金归集</td><td>Arkham 标记“Binance-Hacker-1029”地址簇，持有资产估值约 $5.84B</td></tr>
+  </table>
+  <div class="note"><b>两套说法不矛盾：</b>官方说的是“入侵入口”（DevOps 笔记本 → 服务容器 → 未授权提现）；链上研究说的是“资金怎么被转走”（EIP-7702 授权滥用）。最终入侵链以 Binance 完整技术复盘为准。</div>
+</section>
+
+<section>
+  <div class="sec"><div class="no">06</div><h2>这不是 2019 年那起</h2></div>
+  <div class="note">2019-05-07 的 Binance 被盗是 <b>7,000 BTC</b>（约 $40–41M），走的是热钱包私钥/签名被攻破；本次是 <b>2026-10-30</b> 的多链事件，链上转出约 <b>$5.8B</b>、官方初步影响约 <b>$6.3B</b>、已冻结约 <b>$3B</b>。两起事件的规模、资产、路径都不同，不要混用。</div>
+</section>
+
+<section>
+  <div class="sec"><div class="no">07</div><h2>数据边界</h2></div>
+  <div class="note">
+    <b>1. 官方初步，不是最终结论。</b>$6.3B 影响、$3B 冻结来自 Binance 10:24 初步公告；完整技术复盘发布后可能调整。<br>
+    <b>2. $5.8B 是链上转出总额。</b>Arkham/分析师按当时价格估算，区间 $5.57–5.84B；不等于最终净损失。<br>
+    <b>3. 净损失是推算。</b>按官方 6.3 − 3.0 ≈ 3.3B；Binance 尚未给最终净额。CZ 08:10 的“略超 $1B”是早期口径，已被官方初步更新。<br>
+    <b>4. 冻结金额有重叠。</b>发行方冻结与链上冻结不能简单相加；以 Binance 官方“约 $3B”为准。<br>
+    <b>5. 用户资金安全。</b>Binance 称 SAFU + 公司资金全额覆盖，将在修复后发布更新版储备证���。
+  </div>
+</section>
+
+<section>
+  <div class="sec"><div class="no">08</div><h2>来源</h2></div>
+  <div class="sources">
+    1. Binance 初步调查（Odaily，2026-10-30 10:24）：<a href="https://www.odaily.news/en/newsflash/529015" target="_blank" rel="noopener">Losses ~$6.3B, ~$3B frozen, full compensation</a><br>
+    2. BlockBeats（2026-10-30）：<a href="https://en.theblockbeats.news/flash/374538" target="_blank" rel="noopener">DevOps engineer laptop compromise, ~$6.3B impact</a><br>
+    3. 神鱼链上复盘（ChainCatcher，2026-10-30 08:30）：<a href="https://www.chaincatcher.com/zh-tw/article/2300175" target="_blank" rel="noopener">攻击者 3 分钟转走约 58 亿美元</a><br>
+    4. DigitalToday（2026-10-30）：<a href="https://www.digitaltoday.co.kr/cn/view/121595/binance-wallets-show-5-57-billion-in-crypto-moves-as-tether-circle-freeze-funds" target="_blank" rel="noopener">$5.57B 多链转出、EIP-7702、Tether/Circle 冻结</a><br>
+    5. Herald Business（2026-10-30）：<a href="https://biz.heraldcorp.com/article/10920393" target="_blank" rel="noopener">Binance halts deposits/withdrawals, $3B frozen</a><br>
+    6. The Block（2026-10-29）：<a href="https://www.theblock.co/news/markets/2026-10-29-binance-investigating-hack-suspicious-outflows-5-billion-432171" target="_blank" rel="noopener">Suspicious outflows up to $5.8B</a><br>
+    7. 何一发言（ChainCatcher，2026-10-30 08:10）：<a href="https://www.chaincatcher.com/article/2300166" target="_blank" rel="noopener">承担全部被盗损失，充提暂停</a><br>
+    8. Binance.US 独立性（Foresight News）：<a href="https://foresightnews.pro/news/detail/116406" target="_blank" rel="noopener">Binance.US 用户资金不受影响</a>
+  </div>
+</section>
+
+<footer>2026-10-30 Binance 被盗事件总结 · 数据来自公开报道与链上研究 · 不构成投资建议<br>加密资产被盗与合约交易均可能导致本金全部损失</footer>
+
+</div>
+</body>
+</html>
